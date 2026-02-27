@@ -1,7 +1,7 @@
 import { useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import Lenis from "lenis";
+
 import { SplitText } from "gsap/SplitText";
 import { CustomEase } from "gsap/CustomEase";
 
@@ -22,62 +22,70 @@ const socialLinks = [
 ];
 
 const Navbar = () => {
-  const lenis = new Lenis();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-
-  const raf = (time: number) => {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  };
-
-  requestAnimationFrame(raf);
 
   useGSAP(
     () => {
       const tl = gsap.timeline();
       if (isMenuOpen) {
-        setIsAnimating(true);
-
-        lenis.stop();
         tl.to(".sideMenu", {
           y: -110,
           duration: 0.3,
           opacity: 0,
           ease: "hop",
         });
-
+        tl.to(
+          ".slide",
+          {
+            yPercent: -100,
+            duration: 0.5,
+            opacity: 1,
+            stagger: 0.03,
+          },
+          "-=0.1",
+        );
+        tl.to(
+          ".menu",
+          {
+            bottom: 0,
+            left: 0,
+            height: "100vh",
+            opacity: 1,
+            ease: "power2",
+            duration: 0.7,
+          },
+          "-=0.5",
+        );
+      }
+      // Close Menu
+      else {
         tl.to(".menu", {
-          bottom: 0,
-          left: 0,
-          height: "100vh",
-          opacity: 1,
-          ease: "expo",
+          bottom: "-100vh",
+          height: "0",
+          // opacity: 0,
+          ease: "power2",
           duration: 0.7,
         });
-
-        tl.to(".slide", {
-          yPercent: 100,
-          duration: 0.2,
-          backgroundColor: "red",
-          stagger: 0.3,
-        });
-      } else {
-        // tl.to(".menu", {
-        //   bottom: "-100vh",
-        //   height: "0",
-        //   opacity: 0,
-        //   ease: "expo.in",
-        //   duration: 0.3,
-        // });
-        // tl.to(".sideMenu", {
-        //   y: 0,
-        //   opacity: 1,
-        //   ease: "hop",
-        //   duration: 0.3,
-        // });
-        tl.reverse();
+        tl.to(
+          ".slide",
+          {
+            yPercent: 100,
+            duration: 0.5,
+            stagger: 0.03,
+          },
+          "-=0.6",
+        );
+        tl.to(
+          ".sideMenu",
+          {
+            y: 0,
+            opacity: 1,
+            ease: "hop",
+            duration: 0.3,
+          },
+          "-=0.3",
+        );
       }
     },
     { dependencies: [isMenuOpen] },
@@ -89,7 +97,16 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="sticky z-10 flex w-full items-start justify-between px-10 pt-3">
+      {/* Slides */}
+      <div className="pointer-events-none fixed top-0 left-0 z-2 flex h-full w-screen">
+        <div className="slide bg-text h-full basis-1/4 opacity-0" />
+        <div className="slide bg-text h-full basis-1/4 opacity-0" />
+        <div className="slide bg-text h-full basis-1/4 opacity-0" />
+        <div className="slide bg-text h-full basis-1/4 opacity-0" />
+      </div>
+
+      {/* Navbar */}
+      <nav className="fixed top-3 z-10 flex w-full items-start justify-between px-3 md:px-10">
         <div className="sideMenu hidden basis-1/3 flex-col gap-y-0 lg:flex">
           {sideMenu.map((item) => (
             <a
@@ -102,13 +119,13 @@ const Navbar = () => {
           ))}
         </div>
 
-        <p className="instrument-italic basis-1/3 text-center text-3xl font-bold">
+        <p className="instrument-italic text-center text-xl font-bold md:basis-1/3 md:text-3xl">
           Chêne
         </p>
 
         <div className="flex basis-1/3 justify-end">
           <button
-            className="border-border cursor-pointer rounded-full border px-4 py-1 text-sm"
+            className="border-border cursor-pointer rounded-full border px-4 py-0.5 text-sm md:py-1"
             onClick={toggleMenu}
           >
             {isMenuOpen ? "Close" : "Menu"}
@@ -119,35 +136,31 @@ const Navbar = () => {
       {/* Menu */}
 
       <section
-        className={`menu bg-foreground fixed flex h-0 w-screen origin-bottom items-end p-5 opacity-0`}
+        className={`menu bg-foreground fixed z-5 flex h-0 w-screen origin-bottom items-end p-5 opacity-0`}
       >
-        <div className="bg-background flex h-[95%] w-full overflow-hidden rounded-lg">
-          <div className="relative flex basis-[30%] flex-col">
-            <div className="slide bg-background absolute top-0 left-0 z-1 h-full w-full" />
+        <div className="bg-background flex h-[95%] w-full flex-col overflow-hidden rounded-lg lg:flex-row">
+          <div className="flex basis-[30%] flex-col">
             {/* Menu */}
-            <div className="border-border flex basis-4/5 flex-col justify-around border-b p-10">
+            <div className="border-border flex basis-4/5 flex-col justify-around gap-y-3 border-b p-10 xl:gap-y-0">
               {sideMenu.map((item, index) => (
                 <a
                   href={item.link}
                   key={item.title}
                   onMouseEnter={() => setActiveIndex(index)}
                   onMouseLeave={() => setActiveIndex(null)}
-                  className={`w-fit text-5xl font-medium transition-all duration-300 ease-linear ${activeIndex !== null && activeIndex !== index ? "text-text/20 translate-x-2" : "text-text"}`}
+                  className={`w-fit text-3xl font-medium transition-all delay-100 duration-300 ease-linear lg:text-5xl ${activeIndex !== null && activeIndex !== index ? "text-text/20 translate-x-2" : "text-text"}`}
                 >
                   {item.title}
                 </a>
               ))}
             </div>
           </div>
-          <div className="border-x-border relative basis-[45%] border-x">
-            <div className="slide bg-background absolute top-0 left-0 z-1 h-full w-full" />
-          </div>
-          <div className="relative flex basis-[25%] flex-col items-center justify-between">
-            <div className="slide bg-background absolute top-0 left-0 z-1 h-full w-full" />
+          <div className="border-x-border hidden basis-[45%] border-x lg:block"></div>
+          <div className="flex basis-full flex-col justify-between lg:basis-[25%] lg:items-center">
             {/* Social Links */}
 
-            <p className="mt-10 text-xl font-medium">Social</p>
-            <div className="flex flex-col gap-y-2">
+            <p className="mt-10 p-10 text-xl font-medium lg:p-0">Social</p>
+            <div className="flex flex-col gap-y-2 px-10 lg:p-0">
               {socialLinks.map((item) => (
                 <a
                   href={item.link}
