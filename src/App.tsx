@@ -1,3 +1,4 @@
+import About from "./about";
 import Hero from "./hero";
 import Navbar from "./navbar";
 import Works from "./works";
@@ -17,6 +18,7 @@ function App() {
       <Navbar />
       <Hero />
       <Works />
+      <About/>
     </main>
   );
 }

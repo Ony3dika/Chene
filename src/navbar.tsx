@@ -9,9 +9,9 @@ gsap.registerPlugin(SplitText, CustomEase);
 CustomEase.create("hop", "0.87, 0.0, 0.13, 1.0");
 
 const sideMenu = [
-  { title: "Home", link: "#" },
-  { title: "Work", link: "#" },
-  { title: "Services", link: "#" },
+  { title: "Home", link: "#home" },
+  { title: "Work", link: "#works" },
+  { title: "About", link: "#about" },
   { title: "Highlight", link: "#" },
 ];
 
@@ -74,7 +74,7 @@ const Navbar = () => {
             duration: 0.5,
             stagger: 0.03,
           },
-          "-=0.6",
+          "-=0.7",
         );
         tl.to(
           ".sideMenu",
@@ -106,7 +106,7 @@ const Navbar = () => {
       </div>
 
       {/* Navbar */}
-      <nav className="fixed top-3 z-10 flex w-full items-start justify-between px-3 md:px-10">
+      <nav className="fixed top-3 z-10 flex w-full items-start justify-between px-3 text-indigo-100 mix-blend-difference md:px-10">
         <div className="sideMenu hidden basis-1/3 flex-col gap-y-0 lg:flex">
           {sideMenu.map((item) => (
             <a
@@ -146,9 +146,10 @@ const Navbar = () => {
                 <a
                   href={item.link}
                   key={item.title}
+                  onClick={() => setIsMenuOpen(false)}
                   onMouseEnter={() => setActiveIndex(index)}
                   onMouseLeave={() => setActiveIndex(null)}
-                  className={`w-fit text-3xl font-medium transition-all delay-100 duration-300 ease-linear lg:text-5xl ${activeIndex !== null && activeIndex !== index ? "text-text/20 translate-x-2" : "text-text"}`}
+                  className={`w-fit text-3xl font-medium transition-all delay-50 duration-300 ease-linear lg:text-5xl ${activeIndex !== null && activeIndex !== index ? "text-text/20 translate-x-2" : "text-text"}`}
                 >
                   {item.title}
                 </a>

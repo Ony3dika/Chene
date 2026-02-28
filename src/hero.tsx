@@ -2,19 +2,21 @@ import { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import pic1 from "../public/pic1.jpg";
-import pic2 from "../public/pic2.jpg";
-import pic3 from "../public/pic3.jpg";
-import pic4 from "../public/pic4.jpg";
+import pic1 from "/pic1.webp";
+import pic2 from "/pic2.webp";
+import pic3 from "/pic3.webp";
+import pic4 from "/pic4.webp";
+import pic5 from "/pic9.webp";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const furnitures = [
-  { id: 1, name: "Revolve", image: pic1 },
-  { id: 2, name: "Evolve", image: pic2 },
-  { id: 3, name: "Strand", image: pic3 },
-  { id: 4, name: "Oakley", image: pic4 },
-];
+  { id: 1, name: "Marais", image: pic1 },
+  { id: 2, name: "Montaigne", image: pic2 },
+  { id: 3, name: "Rêve", image: pic3 },
+  { id: 4, name: "Sierra", image: pic4 },
+  { id: 5, name: "Céleste", image: pic5 },
+];  
 
 const Hero = () => {
   const [currentImage, setCurrentImage] = useState(0);
@@ -22,20 +24,13 @@ const Hero = () => {
   const nextImgRef = useRef<HTMLImageElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
   const isAnimating = useRef(false);
+  const currentImageRef = useRef(currentImage);
+  const progressTlRef = useRef<gsap.core.Timeline | null>(null);
 
   useGSAP(
     () => {
-      const tl = gsap.timeline();
-      tl.to(".hero-text", {
-        opacity: 0,
-        scrollTrigger: {
-          trigger: ".hero",
-          start: "top top",
-          end: "+=50%",
-          scrub: true,
-        },
-      });
-      tl.to(".hero-img", {
+     
+      gsap.to(".hero-img", {
         borderRadius: 0,
         width: "100%",
         height: "100%",
@@ -50,6 +45,26 @@ const Hero = () => {
         },
       });
     },
+
+    { dependencies: [] },
+  );
+
+  // Progress
+  useGSAP(
+    () => {
+      const progressTl = gsap.timeline({ repeat: -1 });
+      progressTl.to(".progress", {
+        width: "100%",
+        duration: 5,
+        ease: "none",
+
+        onComplete: () => {
+          handleClick();
+        },
+      });
+      progressTlRef.current = progressTl;
+    },
+
     { dependencies: [] },
   );
 
@@ -57,7 +72,13 @@ const Hero = () => {
     if (isAnimating.current) return;
     isAnimating.current = true;
 
-    const next = (currentImage + 1) % furnitures.length;
+    // Restart the progress bar
+    if (progressTlRef.current) {
+      progressTlRef.current.restart();
+    }
+
+    const next = (currentImageRef.current + 1) % furnitures.length;
+    currentImageRef.current = next;
     setNextImage(next);
 
     requestAnimationFrame(() => {
@@ -86,7 +107,6 @@ const Hero = () => {
           setNextImage(null);
           isAnimating.current = false;
 
-     
           if (textRef.current) {
             gsap.fromTo(
               textRef.current,
@@ -105,14 +125,15 @@ const Hero = () => {
   };
 
   return (
-    <main className="hero flex h-screen items-center justify-center">
-      <div className="absolute top-1/2 lg:left-1/3 z-2 -translate-y-1/2 overflow-clip mix-blend-difference">
+    <main id="home" className="hero flex h-screen items-center justify-center">
+      <div className="absolute top-1/2 z-2 min-w-1/7 -translate-y-1/2 overflow-clip mix-blend-difference lg:left-1/3">
         <p
           ref={textRef}
-          className="hero-text instrument-italic text-primary text-6xl font-medium"
+          className=" instrument-italic text-primary text-6xl font-medium"
         >
           {furnitures[currentImage].name}
         </p>
+        <div className="progress bg-text h-[0.4px] w-0" />
       </div>
       <div
         onClick={handleClick}

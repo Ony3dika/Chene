@@ -3,6 +3,7 @@
 :root {
   --background: #fcf4eb;
   --foreground: #e2d7cc;
+  --dark:#181313;
   --primary: #f96d41;
   --text: #2c2525;
   --border: #2c252548;
@@ -11,6 +12,7 @@
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-dark: var(--dark);
   --color-text: var(--text);
   --color-primary: var(--primary);
   --color-border: var(--border);
