@@ -2,12 +2,12 @@ const About = () => {
   return (
     <main
       id="about"
-      className="flex xl:flex-row flex-col h-screen justify-between px-3 py-10 lg:px-10"
+      className="my-20 flex min-h-screen flex-col items-center justify-between px-3 py-10 lg:px-10 xl:my-40 xl:flex-row"
     >
       <section className="flex h-full basis-[66%] flex-col rounded-lg p-3">
-        <p className="text-4xl lg:text-7xl">About</p>
+        <p className="body-text text-4xl lg:text-7xl">About</p>
 
-        <p className="my-10 text-lg lg:leading-12 leading-10 lg:text-3xl text-justify">
+        <p className="body-text my-10 text-justify text-lg leading-10 lg:text-3xl lg:leading-12">
           <span className="instrument-italic"> Chêne</span> is a French
           furniture workshop based in Lyon, France. <br /> We specialize in
           creating high-quality, handcrafted wooden furniture for the modern
@@ -16,7 +16,7 @@ const About = () => {
           and longevity.
         </p>
 
-        <p className="text-lg leading-12 italic lg:text-3xl">
+        <p className="body-text text-lg leading-12 italic lg:text-3xl">
           • Form • Design • Furniture •
         </p>
       </section>

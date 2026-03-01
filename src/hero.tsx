@@ -129,7 +129,7 @@ const Hero = () => {
       <div className="absolute top-1/2 z-2 min-w-1/7 -translate-y-1/2 overflow-clip mix-blend-difference lg:left-1/3">
         <p
           ref={textRef}
-          className=" instrument-italic text-primary text-6xl font-medium"
+          className=" instrument-italic text-primary lg:text-6xl text-4xl font-medium"
         >
           {furnitures[currentImage].name}
         </p>

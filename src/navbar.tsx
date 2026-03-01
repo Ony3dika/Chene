@@ -12,7 +12,7 @@ const sideMenu = [
   { title: "Home", link: "#home" },
   { title: "Work", link: "#works" },
   { title: "About", link: "#about" },
-  { title: "Highlight", link: "#" },
+  { title: "Craft", link: "#craft" },
 ];
 
 const socialLinks = [
@@ -57,13 +57,25 @@ const Navbar = () => {
           },
           "-=0.5",
         );
+
+        tl.fromTo(
+          ".menu-link",
+          { x: -50, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            ease: "power2",
+            duration: 0.1,
+            stagger: 0.01
+          },
+          "-=0.6",
+        );
       }
       // Close Menu
       else {
         tl.to(".menu", {
           bottom: "-100vh",
           height: "0",
-          // opacity: 0,
           ease: "power2",
           duration: 0.7,
         });
@@ -106,13 +118,13 @@ const Navbar = () => {
       </div>
 
       {/* Navbar */}
-      <nav className="fixed top-3 z-10 flex w-full items-start justify-between px-3 text-indigo-100 mix-blend-difference md:px-10">
+      <nav className="fixed top-3 z-10 flex w-full items-start justify-between px-3 text-indigo-200 mix-blend-difference md:px-10">
         <div className="sideMenu hidden basis-1/3 flex-col gap-y-0 lg:flex">
           {sideMenu.map((item) => (
             <a
               href={item.link}
               key={item.title}
-              className="text-sm font-medium"
+              className="hover:text-primary text-sm font-medium transition-all delay-5 duration-250 ease-in-out"
             >
               {item.title}
             </a>
@@ -149,7 +161,7 @@ const Navbar = () => {
                   onClick={() => setIsMenuOpen(false)}
                   onMouseEnter={() => setActiveIndex(index)}
                   onMouseLeave={() => setActiveIndex(null)}
-                  className={`w-fit text-3xl font-medium transition-all delay-50 duration-300 ease-linear lg:text-5xl ${activeIndex !== null && activeIndex !== index ? "text-text/20 translate-x-2" : "text-text"}`}
+                  className={`menu-link w-fit text-3xl font-medium transition-all delay-10 duration-150 ease-linear lg:text-5xl ${activeIndex !== null && activeIndex !== index ? "text-text/20 translate-x-2" : "text-text"}`}
                 >
                   {item.title}
                 </a>
@@ -160,13 +172,13 @@ const Navbar = () => {
           <div className="flex basis-full flex-col justify-between lg:basis-[25%] lg:items-center">
             {/* Social Links */}
 
-            <p className="mt-10 p-10 text-xl font-medium lg:p-0">Social</p>
+            <p className="menu-link mt-10 p-10 text-xl font-medium lg:p-0">Social</p>
             <div className="flex flex-col gap-y-2 px-10 lg:p-0">
               {socialLinks.map((item) => (
                 <a
                   href={item.link}
                   key={item.title}
-                  className="text-sm font-medium"
+                  className="menu-link text-sm font-medium"
                 >
                   {item.title}
                 </a>
