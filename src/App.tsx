@@ -24,27 +24,29 @@ function App() {
 
   useGSAP(
     () => {
-      document.querySelectorAll(".body-text").forEach((text) => {
+      document.querySelectorAll(".body-text").forEach((text, i) => {
         const split = new SplitText(text, {
-          type: "lines",
+          type: "words",
+          mask: "words",
         });
 
-        gsap.fromTo(
-          split.lines,
-          { yPercent: 100, opacity: 0 },
+        gsap.from(
+          split.words,
           {
-            yPercent: 0,
-            opacity: 1,
-            ease: "power2.out",
-            stagger: 0.3,
             scrollTrigger: {
               trigger: text,
               scroller: document.body,
               start: "top 80%",
-              end: "bottom 80%",
-              scrub: true,
-              markers: true,
+              end: "top 20%",
+              scrub: false,
+              markers: false,
             },
+            yPercent: 100,
+            scaleY: 0,
+            transformOrigin: "top",
+            opacity: 0,
+            stagger: 0.03,
+            duration: 0.3,
           },
         );
       });

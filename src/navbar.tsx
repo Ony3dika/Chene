@@ -66,7 +66,7 @@ const Navbar = () => {
             opacity: 1,
             ease: "power2",
             duration: 0.1,
-            stagger: 0.01
+            stagger: 0.01,
           },
           "-=0.6",
         );
@@ -131,9 +131,13 @@ const Navbar = () => {
           ))}
         </div>
 
-        <p className="instrument-italic text-center text-xl font-bold md:basis-1/3 md:text-3xl">
-          Chêne
-        </p>
+        {isMenuOpen ? (
+          <img src="/logo.webp" className="h-8" />
+        ) : (
+          <p className="instrument-italic text-center text-xl font-bold md:basis-1/3 md:text-3xl">
+            Chêne
+          </p>
+        )}
 
         <div className="flex basis-1/3 justify-end">
           <button
@@ -172,7 +176,9 @@ const Navbar = () => {
           <div className="flex basis-full flex-col justify-between lg:basis-[25%] lg:items-center">
             {/* Social Links */}
 
-            <p className="menu-link mt-10 p-10 text-xl font-medium lg:p-0">Social</p>
+            <p className="menu-link mt-10 p-10 text-xl font-medium lg:p-0">
+              Social
+            </p>
             <div className="flex flex-col gap-y-2 px-10 lg:p-0">
               {socialLinks.map((item) => (
                 <a

@@ -100,7 +100,7 @@ const Craft = () => {
                 •
               </span>
               <p
-                className={`text-xl transition-all duration-100 ease-in-out lg:text-3xl ${
+                className={`body-text text-xl transition-all duration-100 ease-in-out lg:text-3xl ${
                   index === activeCraft ? "text-text opacity-100" : "opacity-30"
                 }`}
               >
@@ -122,7 +122,7 @@ const Craft = () => {
 
         {/* Description */}
         <div className="order-3 flex h-1/4 flex-col items-center xl:h-2/3 xl:basis-1/3 xl:justify-center xl:py-0">
-          <p ref={descRef} className="w-4/5 text-justify xl:w-2/3">
+          <p ref={descRef} className="body-text w-4/5 text-justify xl:w-2/3">
             {craftData[activeCraft].description}
           </p>
         </div>

@@ -21,17 +21,19 @@ const Footer = () => {
   return (
     <footer
       id="footer"
-      className="bg-foreground flex xl:h-screen flex-col px-3 xl:pt-32 pt-20 lg:px-10"
+      className="bg-foreground flex flex-col px-3 pt-20 lg:px-10 xl:h-screen xl:pt-32"
     >
-      <section className="flex xl:flex-row flex-col justify-between">
+      <section className="flex flex-col justify-between xl:flex-row">
         <div className="basis-1/2">
-          <a href="#">hello@chene.studio</a>
+          <a href="#" className="body-text">
+            hello@chene.studio
+          </a>
         </div>
 
-        <div className="flex basis-1/2 xl:my-0 my-20 xl:justify-end gap-x-20">
+        <div className="my-20 flex basis-1/2 gap-x-20 xl:my-0 xl:justify-end">
           {/* Service */}
           <div>
-            <p className="mb-5 text-sm font-bold">Service</p>
+            <p className="body-text mb-5 text-sm font-bold">Service</p>
             {serviceLinks.map((link) => (
               <div
                 className="group my-1 block h-6 overflow-clip"
@@ -53,7 +55,7 @@ const Footer = () => {
             ))}
           </div>
           <div>
-            <p className="mb-5 text-sm font-bold">Support</p>
+            <p className="body-text mb-5 text-sm font-bold">Support</p>
             {supportLinks.map((link) => (
               <div
                 className="group my-1 block h-6 overflow-clip"
@@ -76,7 +78,7 @@ const Footer = () => {
           </div>
           {/* Socials */}
           <div>
-            <p className="mb-5 text-sm font-bold">Follow</p>
+            <p className="body-text mb-5 text-sm font-bold">Follow</p>
             {socialLinks.map((link) => (
               <div
                 className="group my-1 block h-6 overflow-clip"
@@ -102,7 +104,10 @@ const Footer = () => {
 
       {/* Bottom */}
       <section className="mt-auto flex items-end justify-between pb-4">
-        <p className="instrument-italic text-6xl xl:text-8xl">Chêne</p>
+        <div className="flex items-center gap-x-2">
+          <img src="/logo.webp" className="h-10" alt="" />
+          <p className="instrument-italic text-6xl xl:text-8xl">Chêne</p>
+        </div>
 
         <p className="text-text/70 text-sm font-medium">2026 Chêne, Inc.</p>
       </section>
