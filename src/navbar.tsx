@@ -124,6 +124,12 @@ const Navbar = () => {
             <a
               href={item.link}
               key={item.title}
+              onClick={(e) => {
+                e.preventDefault();
+                document
+                  .querySelector(item.link)
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
               className="hover:text-primary text-sm font-medium transition-all delay-5 duration-250 ease-in-out"
             >
               {item.title}
@@ -141,7 +147,7 @@ const Navbar = () => {
 
         <div className="flex basis-1/3 justify-end">
           <button
-            className="border-border cursor-pointer rounded-full border px-4 py-0.5 text-sm md:py-1"
+            className="border-border cursor-pointer rounded-full border px-4 py-0.5 text-sm uppercase md:py-1"
             onClick={toggleMenu}
           >
             {isMenuOpen ? "Close" : "Menu"}
@@ -180,14 +186,15 @@ const Navbar = () => {
               Social
             </p>
             <div className="flex flex-col gap-y-2 px-10 lg:p-0">
-              {socialLinks.map((item) => (
-                <a
-                  href={item.link}
-                  key={item.title}
-                  className="menu-link text-sm font-medium"
-                >
-                  {item.title}
-                </a>
+              {socialLinks.map((link) => (
+                <div className="block h-10" key={link.title}>
+                  <a
+                    href={link.link}
+                    className="text-text hover:text-primary block h-full transition-all delay-5 duration-250 ease-in-out"
+                  >
+                    {link.title}
+                  </a>
+                </div>
               ))}
             </div>
 

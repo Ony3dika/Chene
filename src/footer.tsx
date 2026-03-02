@@ -30,7 +30,7 @@ const Footer = () => {
           </a>
         </div>
 
-        <div className="my-20 flex basis-1/2 gap-x-20 xl:my-0 xl:justify-end">
+        <div className="my-20 flex basis-1/2 xl:gap-x-20 gap-x-16 xl:my-0 xl:justify-end">
           {/* Service */}
           <div>
             <p className="body-text mb-5 text-sm font-bold">Service</p>
@@ -41,7 +41,7 @@ const Footer = () => {
               >
                 <a
                   href={link.link}
-                  className="block h-full transition-all delay-5 duration-250 ease-in-out group-hover:-translate-y-full"
+                  className="body-text block h-full transition-all delay-5 duration-250 ease-in-out group-hover:-translate-y-full"
                 >
                   {link.title}
                 </a>
@@ -63,7 +63,7 @@ const Footer = () => {
               >
                 <a
                   href={link.link}
-                  className="block h-full transition-all delay-5 duration-250 ease-in-out group-hover:-translate-y-full"
+                  className="body-text block h-full transition-all delay-5 duration-250 ease-in-out group-hover:-translate-y-full"
                 >
                   {link.title}
                 </a>
@@ -86,7 +86,7 @@ const Footer = () => {
               >
                 <a
                   href={link.link}
-                  className="block h-full transition-all delay-5 duration-250 ease-in-out group-hover:-translate-y-full"
+                  className="body-text block h-full transition-all delay-5 duration-250 ease-in-out group-hover:-translate-y-full"
                 >
                   {link.title}
                 </a>

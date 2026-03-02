@@ -55,7 +55,7 @@ const Hero = () => {
       const progressTl = gsap.timeline({ repeat: -1 });
       progressTl.to(".progress", {
         width: "100%",
-        duration: 5,
+        duration: 4,
         ease: "none",
 
         onComplete: () => {
@@ -126,10 +126,10 @@ const Hero = () => {
 
   return (
     <main id="home" className="hero flex h-screen items-center justify-center">
-      <div className="absolute top-1/2 z-2 min-w-1/7 -translate-y-1/2 overflow-clip mix-blend-difference lg:left-1/3">
+      <div className="pointer-events-none absolute top-1/2 z-2 min-w-1/7 -translate-y-1/2 overflow-clip mix-blend-difference lg:left-1/3">
         <p
           ref={textRef}
-          className=" instrument-italic text-primary lg:text-6xl text-4xl font-medium"
+          className="instrument-italic text-primary text-4xl font-medium lg:text-6xl"
         >
           {furnitures[currentImage].name}
         </p>
@@ -137,7 +137,7 @@ const Hero = () => {
       </div>
       <div
         onClick={handleClick}
-        className="hero-img relative h-1/4 w-3/5 cursor-pointer overflow-clip rounded-lg lg:h-64 lg:w-64"
+        className="hero-img bg-red relative h-1/4 w-3/5 cursor-pointer overflow-clip rounded-lg lg:h-64 lg:w-64"
       >
         <img
           src={furnitures[currentImage].image}
